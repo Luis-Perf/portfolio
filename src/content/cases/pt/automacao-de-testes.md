@@ -2,7 +2,7 @@
 title: Automação de testes
 translationKey: test-automation
 order: 3
-context: [Consultoria de seguros, 2021–2023]
+context: [Consultoria de seguros]
 metrics:
   - value: 2 a 3 horas
     label: liberadas por dia

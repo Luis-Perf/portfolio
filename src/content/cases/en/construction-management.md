@@ -2,7 +2,7 @@
 title: Construction management system
 translationKey: construction-management
 order: 1
-context: [High-end construction company, 2023–2025]
+context: [High-end construction company]
 metrics:
   - value: 1 to 2 months
     label: ahead of the contract deadline

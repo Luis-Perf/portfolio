@@ -2,7 +2,7 @@
 title: Test automation
 translationKey: test-automation
 order: 3
-context: [Insurance consultancy, 2021–2023]
+context: [Insurance consultancy]
 metrics:
   - value: 2 to 3 hours
     label: freed up every day

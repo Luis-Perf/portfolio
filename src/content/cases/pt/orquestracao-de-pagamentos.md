@@ -2,7 +2,7 @@
 title: Orquestração de pagamentos
 translationKey: payment-orchestration
 order: 2
-context: [Gateway de pagamentos, 2026–hoje]
+context: [Gateway de pagamentos]
 metrics:
   - value: Centenas de milhares de reais
     label: processados nos primeiros meses
