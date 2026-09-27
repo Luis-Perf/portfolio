@@ -1,0 +1,28 @@
+---
+import { useTranslations, type Lang } from '../i18n/ui';
+import type { Case } from '../lib/cases';
+import CaseCard from './CaseCard.astro';
+import Section from './Section.astro';
+
+interface Props {
+  lang: Lang;
+  index: number;
+  cases: Case[];
+}
+
+const { lang, index, cases } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<Section id={t.sections.projects.id} index={index} title={t.sections.projects.title}>
+  <div class="cases">
+    {cases.map((entry, i) => <CaseCard entry={entry} lang={lang} index={i + 1} />)}
+  </div>
+</Section>
+
+<style>
+  .cases {
+    display: grid;
+    gap: 2rem;
+  }
+</style>

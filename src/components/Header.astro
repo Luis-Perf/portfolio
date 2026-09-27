@@ -1,0 +1,163 @@
+---
+import { homePath, otherLang, type Alternates } from '../i18n/routes';
+import { languages, useTranslations, type Lang } from '../i18n/ui';
+import Icon from './Icon.astro';
+
+interface Props {
+  lang: Lang;
+  alternates: Alternates;
+}
+
+const { lang, alternates } = Astro.props;
+const t = useTranslations(lang);
+const home = homePath(lang);
+const withoutTrailingSlash = (path: string) => path.replace(/\/+$/, '') || '/';
+const isHome = withoutTrailingSlash(Astro.url.pathname) === withoutTrailingSlash(home);
+const target = otherLang(lang);
+const { services, projects, career, about, contact } = t.sections;
+const links = [services, projects, career, about, contact];
+---
+
+<header class="site-header">
+  <div class="container inner">
+    {/* On the home page "#top" scrolls up instead of reloading. */}
+    <a class="brand" href={isHome ? '#top' : home} aria-current={isHome ? 'page' : undefined}>
+      <span class="brand-node" aria-hidden="true"></span>
+      Luis Perfeito
+    </a>
+
+    <nav aria-label={t.a11y.mainNav}>
+      <ul role="list">
+        {
+          links.map((section) => (
+            <li>
+              <a href={`${home}#${section.id}`}>{section.title}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <div class="tools">
+      <a
+        class="tool lang"
+        href={alternates[target]}
+        hreflang={languages[target]}
+        lang={languages[target]}
+        aria-label={t.a11y.switchLanguage}
+      >
+        {target.toUpperCase()}
+      </a>
+      <button class="tool" type="button" data-theme-toggle hidden aria-pressed="false" aria-label={t.a11y.darkTheme}>
+        <Icon name="contrast" />
+      </button>
+    </div>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: var(--paper);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .inner {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    min-height: var(--header-height);
+  }
+
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .brand-node {
+    width: 0.7rem;
+    height: 0.7rem;
+    background: var(--accent);
+    outline: 1.5px solid var(--ink);
+    outline-offset: 2px;
+  }
+
+  nav {
+    margin-left: auto;
+  }
+
+  nav ul {
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  nav a {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--ink-soft);
+    text-decoration: none;
+  }
+
+  nav a:hover {
+    color: var(--ink);
+    text-decoration: underline;
+    text-decoration-color: var(--accent);
+    text-decoration-thickness: 2px;
+  }
+
+  .tools {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .tool {
+    display: inline-grid;
+    place-items: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    padding: 0;
+    font: 500 0.8rem/1 var(--font-mono);
+    letter-spacing: 0.05em;
+    color: var(--ink);
+    text-decoration: none;
+    background: transparent;
+    border: 1px solid var(--rule-strong);
+    border-radius: var(--radius);
+    cursor: pointer;
+  }
+
+  .tool:hover {
+    border-color: var(--ink);
+    background: var(--surface);
+  }
+
+  .tool :global(svg) {
+    width: 1.15rem;
+    height: 1.15rem;
+  }
+
+  /* Reserve the button's space until the script reveals it. */
+  .tool[hidden] {
+    display: inline-grid;
+    visibility: hidden;
+  }
+
+  @media (max-width: 52rem) {
+    nav {
+      display: none;
+    }
+
+    .tools {
+      margin-left: auto;
+    }
+  }
+</style>

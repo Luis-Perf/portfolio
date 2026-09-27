@@ -1,0 +1,90 @@
+---
+import { site } from '../config/site';
+import { useTranslations, type Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const year = new Date().getFullYear();
+---
+
+<footer class="container">
+  <dl class="title-block">
+    <div class="cell main">
+      <dt class="sr-only">{site.name}</dt>
+      <dd class="name">{site.name}</dd>
+      <dd class="role">{t.footer.role}</dd>
+    </div>
+    <div class="cell">
+      <dt class="label">{t.footer.drawing}</dt>
+      <dd>luisperfeito.com.br</dd>
+    </div>
+    <div class="cell">
+      <dt class="label">{t.footer.scale}</dt>
+      <dd>{t.footer.sheet}</dd>
+    </div>
+    <div class="cell">
+      <dt class="label">©</dt>
+      <dd>{year}</dd>
+    </div>
+  </dl>
+</footer>
+
+<style>
+  footer {
+    padding-bottom: 2rem;
+  }
+
+  .title-block {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border: 1.5px solid var(--ink);
+    background: var(--surface);
+  }
+
+  .cell {
+    padding: 0.75rem 1rem;
+    border-right: 1px solid var(--rule-strong);
+    border-bottom: 1px solid var(--rule-strong);
+  }
+
+  .main {
+    grid-column: 1 / -1;
+  }
+
+  dd {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+  }
+
+  .name {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 700;
+  }
+
+  .role {
+    color: var(--ink-soft);
+  }
+
+  @media (min-width: 48rem) {
+    .title-block {
+      grid-template-columns: 2fr repeat(3, 1fr);
+    }
+
+    .main {
+      grid-column: auto;
+    }
+
+    .cell {
+      border-bottom: 0;
+    }
+
+    .cell:last-child {
+      border-right: 0;
+    }
+  }
+</style>

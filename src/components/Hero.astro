@@ -1,0 +1,116 @@
+---
+import { useTranslations, type Lang } from '../i18n/ui';
+import SystemsDiagram from './SystemsDiagram.astro';
+import WhatsAppLink from './WhatsAppLink.astro';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<section class="hero" aria-labelledby="hero-title">
+  <div class="container">
+    <div class="inner">
+      <span class="rail" aria-hidden="true"></span>
+      <div class="copy">
+        <p class="label eyebrow">
+          <span class="node" aria-hidden="true"></span>
+          {t.hero.eyebrow}
+        </p>
+        <h1 id="hero-title">
+          {t.hero.titleStart} <span class="highlight">{t.hero.titleHighlight}</span>
+        </h1>
+        <p class="lead">{t.hero.lead}</p>
+        <div class="actions">
+          <WhatsAppLink lang={lang} label={t.hero.primaryCta} class="button--primary" />
+          <a class="button button--ghost" href={`#${t.sections.projects.id}`}>{t.hero.secondaryCta}</a>
+        </div>
+      </div>
+      <div class="visual">
+        <SystemsDiagram lang={lang} />
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    padding-top: clamp(3rem, 2rem + 5vw, 6rem);
+  }
+
+  .inner {
+    position: relative;
+    display: grid;
+    gap: 3rem;
+    padding-left: var(--rail-gutter);
+  }
+
+  .rail {
+    position: absolute;
+    top: 0.5rem;
+    bottom: 0;
+    left: var(--rail-x);
+    width: 2px;
+    background: var(--accent);
+  }
+
+  .eyebrow {
+    position: relative;
+    margin-bottom: 1.5rem;
+  }
+
+  .node {
+    position: absolute;
+    top: 0.1rem;
+    left: calc(-1 * var(--rail-gutter) + var(--rail-x) + 1px);
+    width: 0.8rem;
+    height: 0.8rem;
+    background: var(--accent);
+    transform: translateX(-50%) rotate(45deg);
+  }
+
+  h1 {
+    font-size: clamp(2.6rem, 1.6rem + 4.2vw, 4.6rem);
+    font-weight: 800;
+    line-height: 1.02;
+    letter-spacing: -0.035em;
+    max-width: 16ch;
+  }
+
+  .highlight {
+    text-decoration: underline;
+    text-decoration-color: var(--accent);
+    text-decoration-thickness: 0.1em;
+    text-underline-offset: 0.12em;
+    text-decoration-skip-ink: none;
+  }
+
+  .lead {
+    margin-top: 1.75rem;
+    max-width: 38rem;
+    font-size: clamp(1.1rem, 1rem + 0.4vw, 1.25rem);
+    color: var(--ink-soft);
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+    margin-top: 2.25rem;
+  }
+
+  .visual {
+    max-width: 34rem;
+  }
+
+  @media (min-width: 64rem) {
+    .inner {
+      grid-template-columns: 1.15fr 1fr;
+      align-items: center;
+      gap: 4rem;
+    }
+  }
+</style>

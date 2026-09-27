@@ -1,0 +1,30 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import { site } from '../config/site';
+import { useTranslations, type Lang } from '../i18n/ui';
+import { whatsappUrl } from '../lib/whatsapp';
+import Icon from './Icon.astro';
+
+interface Props extends Omit<HTMLAttributes<'a'>, 'href'> {
+  lang: Lang;
+  label: string;
+}
+
+const { lang, label, class: className, ...attrs } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<a
+  {...attrs}
+  class:list={['button', className]}
+  href={whatsappUrl(site.phone, t.whatsapp.fallback)}
+  target="_blank"
+  rel="noopener noreferrer"
+  data-wa-phone={site.phone}
+  data-wa-template={t.whatsapp.template}
+  data-wa-greetings={t.whatsapp.greetings.join('|')}
+>
+  <Icon name="whatsapp" />
+  <span>{label}</span>
+  <span class="sr-only">{t.a11y.opensInNewTab}</span>
+</a>

@@ -1,0 +1,85 @@
+---
+import '@fontsource-variable/bricolage-grotesque/opsz.css';
+import '@fontsource-variable/instrument-sans/wght.css';
+import '@fontsource/ibm-plex-mono/400.css';
+import '@fontsource/ibm-plex-mono/500.css';
+import '../styles/global.css';
+
+import { getImage } from 'astro:assets';
+import photo from '../assets/luis-perfeito.jpg';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { site } from '../config/site';
+import type { Alternates } from '../i18n/routes';
+import { languages, useTranslations, type Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+  title: string;
+  description: string;
+  alternates: Alternates;
+  noindex?: boolean;
+}
+
+const { lang, title, description, alternates, noindex = false } = Astro.props;
+const t = useTranslations(lang);
+const canonical = new URL(alternates[lang], site.url).href;
+const ogImage = await getImage({ src: photo, width: 1200, height: 630, fit: 'cover', position: 'top', format: 'jpg' });
+---
+
+<!doctype html>
+<html lang={languages[lang]}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex" />}
+    <link rel="canonical" href={canonical} />
+    {
+      (Object.keys(languages) as Lang[]).map((code) => (
+        <link rel="alternate" hreflang={languages[code]} href={new URL(alternates[code], site.url).href} />
+      ))
+    }
+    <link rel="alternate" hreflang="x-default" href={new URL(alternates.pt, site.url).href} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content={t.meta.ogLocale} />
+    <meta property="og:image" content={new URL(ogImage.src, site.url).href} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={t.about.photoAlt} />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <meta name="theme-color" content="#f3efe6" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#151719" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    {/* Sets the saved theme before first paint. Hashed into the CSP at build time. */}
+    <script is:inline>
+      try {
+        const theme = localStorage.getItem('theme');
+        if (theme === 'light' || theme === 'dark') document.documentElement.dataset.theme = theme;
+      } catch {
+        // Storage blocked: fall back to the system theme.
+      }
+    </script>
+    <slot name="head" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">{t.a11y.skipToContent}</a>
+    <Header lang={lang} alternates={alternates} />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer lang={lang} />
+    <script>
+      import '../scripts/enhance';
+    </script>
+  </body>
+</html>

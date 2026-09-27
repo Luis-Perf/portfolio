@@ -1,0 +1,108 @@
+---
+interface Props {
+  id: string;
+  index: number;
+  title: string;
+  /** Last section: the rail ends at its node. */
+  end?: boolean;
+}
+
+const { id, index, title, end = false } = Astro.props;
+---
+
+<section id={id} class:list={['section', { end }]} aria-labelledby={`${id}-title`}>
+  <div class="container">
+    <div class="inner">
+      <span class="rail" aria-hidden="true"><span class="rail-fill"></span></span>
+      <header class="head">
+        <span class="node" aria-hidden="true"></span>
+        <p class="label">{String(index).padStart(2, '0')}</p>
+        <h2 id={`${id}-title`}>{title}</h2>
+      </header>
+      <slot />
+    </div>
+  </div>
+</section>
+
+<style>
+  .section {
+    padding-block: var(--section-space) 0;
+  }
+
+  .section.end {
+    padding-bottom: var(--section-space);
+  }
+
+  .inner {
+    position: relative;
+    padding-left: var(--rail-gutter);
+  }
+
+  .rail {
+    position: absolute;
+    top: calc(-1 * var(--section-space));
+    bottom: 0;
+    left: var(--rail-x);
+    width: 2px;
+    background: repeating-linear-gradient(to bottom, var(--rule-strong) 0 6px, transparent 6px 12px);
+  }
+
+  .end .rail {
+    bottom: auto;
+    height: calc(var(--section-space) + 0.6rem);
+  }
+
+  .rail-fill {
+    position: absolute;
+    inset: 0;
+    background: var(--accent);
+    transform-origin: top;
+    transform: scaleY(0);
+  }
+
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      .rail-fill {
+        animation: draw linear both;
+        animation-timeline: view();
+        animation-range: entry 20% cover 55%;
+      }
+    }
+  }
+
+  @keyframes draw {
+    to {
+      transform: scaleY(1);
+    }
+  }
+
+  .head {
+    position: relative;
+    margin-bottom: 2.5rem;
+  }
+
+  .node {
+    position: absolute;
+    top: 0.1rem;
+    left: calc(-1 * var(--rail-gutter) + var(--rail-x) + 1px);
+    width: 0.8rem;
+    height: 0.8rem;
+    background: var(--paper);
+    border: 2px solid var(--accent);
+    transform: translateX(-50%) rotate(45deg);
+  }
+
+  .end .node {
+    background: var(--accent);
+  }
+
+  .head .label {
+    margin-bottom: 0.5rem;
+  }
+
+  h2 {
+    font-size: clamp(2rem, 1.4rem + 2.6vw, 3.25rem);
+    font-weight: 700;
+    max-width: 20ch;
+  }
+</style>
