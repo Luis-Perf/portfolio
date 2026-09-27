@@ -18,4 +18,5 @@ export const site: SiteConfig = {
   github: 'https://github.com/Luis-Perf',
   vcard: '/luis-perfeito.vcf',
   linkedin: 'https://www.linkedin.com/in/luis-felipe-perfeito/',
+  email: 'luisperfeito.1@hotmail.com',
 };

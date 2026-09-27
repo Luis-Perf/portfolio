@@ -123,9 +123,7 @@ const pt = {
   },
   footer: {
     role: 'Desenvolvedor de Software',
-    drawing: 'Prancha',
-    sheet: 'Folha 01/01',
-    scale: 'Escala 1:1',
+    elsewhere: 'Redes',
   },
   notFound: {
     title: 'Página não encontrada',
@@ -258,9 +256,7 @@ const en: Dictionary = {
   },
   footer: {
     role: 'Software Developer',
-    drawing: 'Drawing',
-    sheet: 'Sheet 01/01',
-    scale: 'Scale 1:1',
+    elsewhere: 'Elsewhere',
   },
   notFound: {
     title: 'Page not found',
