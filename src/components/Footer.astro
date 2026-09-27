@@ -18,13 +18,32 @@ const year = new Date().getFullYear();
       <dd class="name">{site.name}</dd>
       <dd class="role">{t.footer.role}</dd>
     </div>
+    {
+      site.email && (
+        <div class="cell email">
+          <dt class="label">{t.contact.email}</dt>
+          <dd>
+            <a href={`mailto:${site.email}`}>{site.email}</a>
+          </dd>
+        </div>
+      )
+    }
     <div class="cell">
-      <dt class="label">{t.footer.drawing}</dt>
-      <dd>luisperfeito.com.br</dd>
-    </div>
-    <div class="cell">
-      <dt class="label">{t.footer.scale}</dt>
-      <dd>{t.footer.sheet}</dd>
+      <dt class="label">{t.footer.elsewhere}</dt>
+      <dd class="links">
+        {
+          site.linkedin && (
+            <a href={site.linkedin} target="_blank" rel="noopener noreferrer">
+              {t.contact.linkedin}
+              <span class="sr-only">{t.a11y.opensInNewTab}</span>
+            </a>
+          )
+        }
+        <a href={site.github} target="_blank" rel="noopener noreferrer">
+          {t.contact.github}
+          <span class="sr-only">{t.a11y.opensInNewTab}</span>
+        </a>
+      </dd>
     </div>
     <div class="cell">
       <dt class="label">©</dt>
@@ -51,13 +70,21 @@ const year = new Date().getFullYear();
     border-bottom: 1px solid var(--rule-strong);
   }
 
-  .main {
+  .main,
+  .email {
     grid-column: 1 / -1;
   }
 
   dd {
     font-family: var(--font-mono);
     font-size: 0.85rem;
+    overflow-wrap: break-word;
+  }
+
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1rem;
   }
 
   .name {
@@ -72,10 +99,11 @@ const year = new Date().getFullYear();
 
   @media (min-width: 48rem) {
     .title-block {
-      grid-template-columns: 2fr repeat(3, 1fr);
+      grid-template-columns: 2fr 1.5fr 1fr 0.6fr;
     }
 
-    .main {
+    .main,
+    .email {
       grid-column: auto;
     }
 
