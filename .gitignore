@@ -20,3 +20,6 @@ Thumbs.db
 
 # lighthouse ci
 .lighthouseci/
+
+# wrangler local state
+.wrangler/
