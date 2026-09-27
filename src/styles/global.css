@@ -1,3 +1,44 @@
+/* Fallback faces sized to match the web fonts, so text doesn't reflow when they
+   load. Measured against Arial and Courier New; Liberation fonts share their metrics. */
+@font-face {
+  font-family: 'Bricolage Fallback';
+  src: local('Arial Bold'), local('Arial-BoldMT'), local('Liberation Sans Bold'), local('LiberationSans-Bold');
+  font-weight: 100 900;
+  size-adjust: 93.4%;
+  ascent-override: 99.6%;
+  descent-override: 28.9%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: 'Instrument Fallback';
+  src: local('Arial'), local('ArialMT'), local('Liberation Sans'), local('LiberationSans');
+  font-weight: 100 549;
+  size-adjust: 101.4%;
+  ascent-override: 95.7%;
+  descent-override: 24.7%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: 'Instrument Fallback';
+  src: local('Arial Bold'), local('Arial-BoldMT'), local('Liberation Sans Bold'), local('LiberationSans-Bold');
+  font-weight: 550 900;
+  size-adjust: 97.3%;
+  ascent-override: 99.7%;
+  descent-override: 25.7%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: 'Plex Mono Fallback';
+  src: local('Courier New'), local('CourierNewPSMT'), local('Liberation Mono'), local('LiberationMono');
+  size-adjust: 100%;
+  ascent-override: 102.5%;
+  descent-override: 27.5%;
+  line-gap-override: 0%;
+}
+
 /* Colors use light-dark(), which follows color-scheme: the system preference
    unless the visitor picked a theme. */
 :root {
@@ -17,9 +58,9 @@
   --accent-ink: light-dark(#b3430a, #ff8f4f);
   --on-accent: #1d2023;
 
-  --font-display: 'Bricolage Grotesque Variable', 'Arial Narrow', system-ui, sans-serif;
-  --font-body: 'Instrument Sans Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --font-mono: 'IBM Plex Mono', ui-monospace, 'Cascadia Mono', Consolas, monospace;
+  --font-display: 'Bricolage Grotesque Variable', 'Bricolage Fallback', sans-serif;
+  --font-body: 'Instrument Sans Variable', 'Instrument Fallback', sans-serif;
+  --font-mono: 'IBM Plex Mono', 'Plex Mono Fallback', monospace;
 
   --container: 72rem;
   --gutter: 1rem;

@@ -136,6 +136,8 @@ O build falha se um projeto existir em só um idioma.
 
 **Conteúdo validado.** Cada projeto passa por um schema Zod, e os textos da interface são tipados. Um erro de conteúdo aparece no build, não em produção.
 
+**Fontes sem deslocamento de layout.** As duas fontes principais são pré-carregadas, e cada família tem uma fonte reserva local (Arial ou Courier New, com equivalentes Liberation no Linux) ajustada com `size-adjust` e `ascent-override`, a partir de medidas feitas contra a fonte real. Com as fontes atrasadas em 2 segundos, o CLS medido fica em 0,0001.
+
 **Sem serviços de terceiros no carregamento.** Fontes e imagens saem do próprio domínio. A única exceção prevista é o Cloudflare Web Analytics, que não usa cookies e dispensa banner de consentimento.
 
 ## Qualidade

@@ -4,6 +4,8 @@ import '@fontsource-variable/instrument-sans/wght.css';
 import '@fontsource/ibm-plex-mono/400.css';
 import '@fontsource/ibm-plex-mono/500.css';
 import '../styles/global.css';
+import bricolageLatin from '@fontsource-variable/bricolage-grotesque/files/bricolage-grotesque-latin-opsz-normal.woff2?url';
+import instrumentLatin from '@fontsource-variable/instrument-sans/files/instrument-sans-latin-wght-normal.woff2?url';
 
 import { getImage } from 'astro:assets';
 import photo from '../assets/luis-perfeito.jpg';
@@ -57,6 +59,8 @@ const ogImage = await getImage({ src: photo, width: 1200, height: 630, fit: 'cov
 
     <meta name="theme-color" content="#f3efe6" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#151719" media="(prefers-color-scheme: dark)" />
+    <link rel="preload" href={bricolageLatin} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={instrumentLatin} as="font" type="font/woff2" crossorigin />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="sitemap" href="/sitemap-index.xml" />
 
