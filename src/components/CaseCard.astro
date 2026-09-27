@@ -1,0 +1,135 @@
+---
+import { casePath } from '../i18n/routes';
+import { useTranslations, type Lang } from '../i18n/ui';
+import { caseLead, caseSlug, type Case } from '../lib/cases';
+import Icon from './Icon.astro';
+import Metrics from './Metrics.astro';
+
+interface Props {
+  entry: Case;
+  lang: Lang;
+  index: number;
+}
+
+const { entry, lang, index } = Astro.props;
+const t = useTranslations(lang);
+const href = casePath(lang, caseSlug(entry));
+const titleId = `case-${caseSlug(entry)}`;
+---
+
+<article class="case reveal" aria-labelledby={titleId}>
+  <header class="strip">
+    <span class="label">{t.projects.caseLabel} {String(index).padStart(2, '0')}</span>
+    <span class="label context">{entry.data.context.join(' · ')}</span>
+  </header>
+  <div class="body">
+    <div class="text">
+      <h3 id={titleId}><a href={href}>{entry.data.title}</a></h3>
+      <p class="lead">{caseLead(entry)}</p>
+      <a class="more" href={href}>
+        {t.projects.readMore}
+        <Icon name="arrow-right" />
+      </a>
+    </div>
+    <Metrics metrics={entry.data.metrics} heading={t.projects.results} />
+  </div>
+  <footer class="tools">
+    <p class="sr-only">{t.projects.tools}</p>
+    <ul class="tags">
+      {entry.data.tags.map((tag) => <li>{tag}</li>)}
+    </ul>
+  </footer>
+</article>
+
+<style>
+  .case {
+    background: var(--surface);
+    border: 1.5px solid var(--ink);
+    border-radius: var(--radius);
+  }
+
+  .strip {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.25rem 1rem;
+    padding: 0.7rem 1.25rem;
+    border-bottom: 1px solid var(--rule-strong);
+  }
+
+  .strip .label:first-child {
+    color: var(--accent-ink);
+  }
+
+  .body {
+    display: grid;
+    gap: 2rem;
+    padding: 1.75rem 1.25rem;
+  }
+
+  h3 {
+    font-size: clamp(1.6rem, 1.3rem + 1.2vw, 2.1rem);
+    font-weight: 700;
+  }
+
+  h3 a {
+    text-decoration: none;
+  }
+
+  h3 a:hover {
+    text-decoration: underline;
+    text-decoration-color: var(--accent);
+    text-decoration-thickness: 3px;
+  }
+
+  .lead {
+    margin-top: 1rem;
+    color: var(--ink-soft);
+    max-width: 58ch;
+  }
+
+  .more {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1.25rem;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .more :global(svg) {
+    width: 1.1rem;
+    height: 1.1rem;
+    color: var(--accent-ink);
+    transition: transform 150ms ease;
+  }
+
+  .more:hover :global(svg) {
+    transform: translateX(3px);
+  }
+
+  .tools {
+    padding: 0.9rem 1.25rem;
+    border-top: 1px dashed var(--rule-strong);
+  }
+
+  @media (min-width: 52rem) {
+    .strip,
+    .body,
+    .tools {
+      padding-inline: 2rem;
+    }
+
+    .body {
+      grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr);
+      gap: 3rem;
+      padding-block: 2.25rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .more :global(svg) {
+      transition: none;
+    }
+  }
+</style>

@@ -1,0 +1,70 @@
+---
+import { useTranslations, type Lang } from '../i18n/ui';
+import Section from './Section.astro';
+
+interface Props {
+  lang: Lang;
+  index: number;
+}
+
+const { lang, index } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<Section id={t.sections.services.id} index={index} title={t.sections.services.title}>
+  <ol class="services" role="list">
+    {
+      t.services.map((service, i) => (
+        <li class="reveal">
+          <p class="label">{String.fromCharCode(65 + i)}</p>
+          <h3>{service.title}</h3>
+          <p>{service.text}</p>
+        </li>
+      ))
+    }
+  </ol>
+</Section>
+
+<style>
+  .services {
+    display: grid;
+    gap: 0;
+    border-top: 1.5px solid var(--ink);
+  }
+
+  li {
+    padding: 1.75rem 0;
+    border-bottom: 1px solid var(--rule-strong);
+  }
+
+  h3 {
+    margin: 0.6rem 0 0.75rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+
+  li > p:last-child {
+    color: var(--ink-soft);
+    max-width: 34ch;
+  }
+
+  @media (min-width: 52rem) {
+    .services {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    li {
+      padding: 2rem 2rem 2.25rem;
+      border-bottom: 0;
+      border-right: 1px solid var(--rule-strong);
+    }
+
+    li:first-child {
+      padding-left: 0;
+    }
+
+    li:last-child {
+      border-right: 0;
+    }
+  }
+</style>

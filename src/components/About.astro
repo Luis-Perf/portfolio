@@ -1,0 +1,164 @@
+---
+import { Picture } from 'astro:assets';
+import photo from '../assets/luis-perfeito.jpg';
+import { useTranslations, type Lang } from '../i18n/ui';
+import Section from './Section.astro';
+
+interface Props {
+  lang: Lang;
+  index: number;
+}
+
+const { lang, index } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<Section id={t.sections.about.id} index={index} title={t.sections.about.title}>
+  <div class="about">
+    <figure class="photo reveal">
+      <Picture
+        src={photo}
+        alt={t.about.photoAlt}
+        formats={['avif', 'webp']}
+        width={640}
+        height={800}
+        widths={[320, 480, 640]}
+        sizes="(min-width: 60rem) 20rem, (min-width: 30rem) 22rem, calc(100vw - 5rem)"
+        fit="cover"
+        position="top"
+      />
+      <figcaption class="label">{t.about.photoCaption}</figcaption>
+    </figure>
+
+    <p class="story reveal">{t.about.text}</p>
+
+    <aside class="education reveal" aria-labelledby="education-title">
+      <h3 id="education-title" class="label">{t.about.educationTitle}</h3>
+      <ul role="list">
+        {
+          t.about.education.map((item) => (
+            <li>
+              <p class="course">{item.course}</p>
+              <p class="school">{`${item.school} · ${item.period}`}</p>
+            </li>
+          ))
+        }
+      </ul>
+      <h4 class="label">{t.about.complementaryTitle}</h4>
+      <ul role="list" class="complementary">
+        {t.about.complementary.map((item) => <li>{item}</li>)}
+      </ul>
+    </aside>
+  </div>
+</Section>
+
+<style>
+  .about {
+    display: grid;
+    gap: 3rem;
+    grid-template-areas: 'photo' 'story' 'education';
+  }
+
+  .photo {
+    grid-area: photo;
+    position: relative;
+    display: grid;
+    gap: 0.75rem;
+    max-width: 22rem;
+  }
+
+  .photo :global(img) {
+    width: 100%;
+    height: auto;
+    border: 1.5px solid var(--ink);
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+
+  .photo::before,
+  .photo::after {
+    content: '';
+    position: absolute;
+    width: 1rem;
+    height: 1rem;
+    border: 0 solid var(--accent);
+  }
+
+  .photo::before {
+    top: -0.5rem;
+    left: -0.5rem;
+    border-top-width: 2px;
+    border-left-width: 2px;
+  }
+
+  .photo::after {
+    right: -0.5rem;
+    bottom: calc(1.5rem + 0.25rem);
+    border-right-width: 2px;
+    border-bottom-width: 2px;
+  }
+
+  .story {
+    grid-area: story;
+  }
+
+  .education {
+    grid-area: education;
+  }
+
+  .story {
+    font-size: clamp(1.2rem, 1.05rem + 0.6vw, 1.45rem);
+    line-height: 1.55;
+    max-width: 40rem;
+  }
+
+  .education {
+    padding: 1.5rem;
+    background: var(--surface);
+    border: 1px solid var(--rule-strong);
+    border-radius: var(--radius);
+  }
+
+  h3,
+  h4 {
+    font-family: var(--font-mono);
+    letter-spacing: 0.08em;
+  }
+
+  ul {
+    display: grid;
+    gap: 1rem;
+    margin: 1rem 0 1.75rem;
+  }
+
+  .course {
+    font-weight: 600;
+    line-height: 1.35;
+  }
+
+  .school {
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+  }
+
+  .complementary {
+    gap: 0.4rem;
+    margin-bottom: 0;
+  }
+
+  .complementary li {
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+  }
+
+  @media (min-width: 60rem) {
+    .about {
+      grid-template-columns: 20rem minmax(0, 1fr);
+      grid-template-areas:
+        'photo story'
+        'photo education';
+      gap: 2.5rem 4rem;
+      align-items: start;
+    }
+  }
+</style>

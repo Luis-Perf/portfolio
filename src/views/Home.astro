@@ -1,0 +1,54 @@
+---
+import { getImage } from 'astro:assets';
+import photo from '../assets/luis-perfeito.jpg';
+import About from '../components/About.astro';
+import Approach from '../components/Approach.astro';
+import Career from '../components/Career.astro';
+import Contact from '../components/Contact.astro';
+import Hero from '../components/Hero.astro';
+import Projects from '../components/Projects.astro';
+import Services from '../components/Services.astro';
+import { site } from '../config/site';
+import Base from '../layouts/Base.astro';
+import { homePath } from '../i18n/routes';
+import { useTranslations, type Lang } from '../i18n/ui';
+import { getCases } from '../lib/cases';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const cases = await getCases(lang);
+const avatar = await getImage({ src: photo, width: 800, height: 800, format: 'jpg' });
+
+const person = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: site.name,
+  jobTitle: t.footer.role,
+  url: new URL(homePath(lang), site.url).href,
+  image: new URL(avatar.src, site.url).href,
+  sameAs: [site.github, site.linkedin].filter(Boolean),
+  alumniOf: t.about.education.map((item) => ({ '@type': 'EducationalOrganization', name: item.school })).filter(
+    (org, i, all) => all.findIndex((other) => other.name === org.name) === i,
+  ),
+};
+---
+
+<Base
+  lang={lang}
+  title={t.meta.title}
+  description={t.meta.description}
+  alternates={{ pt: homePath('pt'), en: homePath('en') }}
+>
+  <script type="application/ld+json" slot="head" is:inline set:html={JSON.stringify(person)} />
+  <Hero lang={lang} />
+  <Services lang={lang} index={1} />
+  <Approach lang={lang} index={2} />
+  <Projects lang={lang} index={3} cases={cases} />
+  <Career lang={lang} index={4} />
+  <About lang={lang} index={5} />
+  <Contact lang={lang} index={6} />
+</Base>

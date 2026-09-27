@@ -1,0 +1,209 @@
+---
+import { render } from 'astro:content';
+import Icon from '../components/Icon.astro';
+import Metrics from '../components/Metrics.astro';
+import WhatsAppLink from '../components/WhatsAppLink.astro';
+import Base from '../layouts/Base.astro';
+import { casePath, homePath } from '../i18n/routes';
+import { useTranslations, type Lang } from '../i18n/ui';
+import { caseAlternates, caseLead, caseSlug, getCases, type Case } from '../lib/cases';
+
+interface Props {
+  entry: Case;
+  lang: Lang;
+}
+
+const { entry, lang } = Astro.props;
+const t = useTranslations(lang);
+const { Content } = await render(entry);
+const alternates = await caseAlternates(entry);
+
+const cases = await getCases(lang);
+const position = cases.findIndex((candidate) => candidate.id === entry.id);
+const next = cases[(position + 1) % cases.length];
+---
+
+<Base lang={lang} title={`${entry.data.title} — Luis Perfeito`} description={caseLead(entry)} alternates={alternates}>
+  <article class="container case" aria-labelledby="case-title">
+    <a class="back" href={`${homePath(lang)}#${t.sections.projects.id}`}>
+      <Icon name="arrow-left" />
+      {t.projects.backToProjects}
+    </a>
+
+    <header class="head">
+      <p class="label">
+        <span class="accent">{t.projects.caseLabel} {String(position + 1).padStart(2, '0')}</span>
+        {` · ${entry.data.context.join(' · ')}`}
+      </p>
+      <h1 id="case-title">{entry.data.title}</h1>
+    </header>
+
+    <div class="layout">
+      <div class="prose">
+        <Content />
+      </div>
+      <aside class="aside">
+        <Metrics metrics={entry.data.metrics} heading={t.projects.results} size="lg" />
+        <div class="tools">
+          <p class="label">{t.projects.tools}</p>
+          <ul class="tags">
+            {entry.data.tags.map((tag) => <li>{tag}</li>)}
+          </ul>
+        </div>
+      </aside>
+    </div>
+
+    <section class="cta" aria-labelledby="case-cta">
+      <h2 id="case-cta">{t.projects.ctaTitle}</h2>
+      <WhatsAppLink lang={lang} label={t.contact.whatsapp} class="button--primary" />
+    </section>
+
+    {
+      next && next.id !== entry.id && (
+        <nav class="next" aria-label={t.projects.nextCase}>
+          <a href={casePath(lang, caseSlug(next))}>
+            <span class="label">{t.projects.nextCase}</span>
+            <span class="next-title">
+              {next.data.title}
+              <Icon name="arrow-right" />
+            </span>
+          </a>
+        </nav>
+      )
+    }
+  </article>
+</Base>
+
+<style>
+  .case {
+    padding-top: clamp(2rem, 1.5rem + 3vw, 4rem);
+    padding-bottom: 5rem;
+  }
+
+  .back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    text-decoration: none;
+    color: var(--ink-soft);
+  }
+
+  .back:hover {
+    color: var(--ink);
+  }
+
+  .back :global(svg) {
+    width: 1.1rem;
+    height: 1.1rem;
+  }
+
+  .head {
+    margin: 2.5rem 0 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1.5px solid var(--ink);
+  }
+
+  .accent {
+    color: var(--accent-ink);
+  }
+
+  h1 {
+    margin-top: 0.75rem;
+    font-size: clamp(2.4rem, 1.6rem + 3.6vw, 4.25rem);
+    font-weight: 800;
+    letter-spacing: -0.035em;
+    max-width: 18ch;
+  }
+
+  .layout {
+    display: grid;
+    gap: 3rem;
+  }
+
+  .prose {
+    max-width: 38rem;
+    font-size: 1.15rem;
+  }
+
+  .prose :global(p + p) {
+    margin-top: 1.25rem;
+  }
+
+  .prose :global(p:first-child) {
+    font-size: 1.3rem;
+    line-height: 1.5;
+  }
+
+  .aside {
+    display: grid;
+    gap: 2.5rem;
+    align-content: start;
+  }
+
+  .tools .label {
+    margin-bottom: 0.75rem;
+  }
+
+  .cta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    margin-top: 4.5rem;
+    padding: 2rem;
+    background: var(--surface);
+    border: 1.5px solid var(--ink);
+    border-radius: var(--radius);
+  }
+
+  .cta h2 {
+    font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2rem);
+    max-width: 22ch;
+  }
+
+  .next {
+    margin-top: 3rem;
+    border-top: 1px dashed var(--rule-strong);
+  }
+
+  .next a {
+    display: grid;
+    gap: 0.4rem;
+    padding-top: 1.5rem;
+    text-decoration: none;
+  }
+
+  .next-title {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    font-weight: 700;
+  }
+
+  .next-title :global(svg) {
+    width: 1.4rem;
+    height: 1.4rem;
+    color: var(--accent-ink);
+  }
+
+  .next a:hover .next-title {
+    text-decoration: underline;
+    text-decoration-color: var(--accent);
+  }
+
+  @media (min-width: 60rem) {
+    .layout {
+      grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+      gap: 5rem;
+    }
+
+    .aside {
+      position: sticky;
+      top: calc(var(--header-height) + 2rem);
+    }
+  }
+</style>

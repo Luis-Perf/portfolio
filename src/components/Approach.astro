@@ -1,0 +1,61 @@
+---
+import { useTranslations, type Lang } from '../i18n/ui';
+import Section from './Section.astro';
+
+interface Props {
+  lang: Lang;
+  index: number;
+}
+
+const { lang, index } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<Section id={t.sections.approach.id} index={index} title={t.sections.approach.title}>
+  <dl class="approach">
+    {
+      t.approach.map((item) => (
+        <div class="row reveal">
+          <dt>{item.title}</dt>
+          <dd>{item.text}</dd>
+        </div>
+      ))
+    }
+  </dl>
+</Section>
+
+<style>
+  .approach {
+    display: grid;
+  }
+
+  .row {
+    display: grid;
+    gap: 0.4rem;
+    padding: 1.4rem 0;
+    border-bottom: 1px dashed var(--rule-strong);
+  }
+
+  .row:first-child {
+    border-top: 1px dashed var(--rule-strong);
+  }
+
+  dt {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    font-weight: 700;
+    line-height: 1.25;
+  }
+
+  dd {
+    color: var(--ink-soft);
+  }
+
+  @media (min-width: 52rem) {
+    .row {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+      gap: 3rem;
+      align-items: baseline;
+    }
+  }
+</style>

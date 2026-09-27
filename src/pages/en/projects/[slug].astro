@@ -1,0 +1,14 @@
+---
+import type { GetStaticPaths } from 'astro';
+import { caseSlug, getCases, type Case } from '../../../lib/cases';
+import CaseStudy from '../../../views/CaseStudy.astro';
+
+export const getStaticPaths = (async () => {
+  const cases = await getCases('en');
+  return cases.map((entry) => ({ params: { slug: caseSlug(entry) }, props: { entry } }));
+}) satisfies GetStaticPaths;
+
+const { entry } = Astro.props as { entry: Case };
+---
+
+<CaseStudy entry={entry} lang="en" />
