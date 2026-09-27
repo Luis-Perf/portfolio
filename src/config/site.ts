@@ -11,7 +11,7 @@ export interface SiteConfig {
 }
 
 export const site: SiteConfig = {
-  name: 'Luis Perfeito',
+  name: 'Luis Felipe Perfeito',
   url: 'https://luisperfeito.com.br',
   phone: '5511999202024',
   phoneDisplay: '+55 11 99920-2024',

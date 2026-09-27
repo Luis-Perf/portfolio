@@ -3,6 +3,7 @@ import { render } from 'astro:content';
 import Icon from '../components/Icon.astro';
 import Metrics from '../components/Metrics.astro';
 import WhatsAppLink from '../components/WhatsAppLink.astro';
+import { site } from '../config/site';
 import Base from '../layouts/Base.astro';
 import { casePath, homePath } from '../i18n/routes';
 import { useTranslations, type Lang } from '../i18n/ui';
@@ -23,7 +24,7 @@ const position = cases.findIndex((candidate) => candidate.id === entry.id);
 const next = cases[(position + 1) % cases.length];
 ---
 
-<Base lang={lang} title={`${entry.data.title} — Luis Perfeito`} description={caseLead(entry)} alternates={alternates}>
+<Base lang={lang} title={`${entry.data.title} — ${site.name}`} description={caseLead(entry)} alternates={alternates}>
   <article class="container case" aria-labelledby="case-title">
     <a class="back" href={`${homePath(lang)}#${t.sections.projects.id}`}>
       <Icon name="arrow-left" />

@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/Luis-Perf/portfolio/actions/workflows/ci.yml/badge.svg)](https://github.com/Luis-Perf/portfolio/actions/workflows/ci.yml)
 
-Portfólio de Luis Perfeito, desenvolvedor de software. Site estático e bilíngue (PT-BR e EN), feito com Astro, sem backend e com um único script no navegador.
+Portfólio de Luis Felipe Perfeito, desenvolvedor de software. Site estático e bilíngue (PT-BR e EN), feito com Astro, sem backend e com um único script no navegador.
 
 | Claro | Escuro |
 | --- | --- |
