@@ -8,24 +8,15 @@ dist/
 # environment
 .env
 .env.*
-!.env.example
-
-# playwright / card export
-test-results/
-playwright-report/
-/card-output/
 
 # logs
 *.log
-npm-debug.log*
-pnpm-debug.log*
 
 # editor / OS
-.vscode/*
-!.vscode/extensions.json
+.vscode/
 .idea/
 .DS_Store
 Thumbs.db
 
-# local Claude settings
-.claude/settings.local.json
+# lighthouse ci
+.lighthouseci/
