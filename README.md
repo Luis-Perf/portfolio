@@ -108,7 +108,7 @@ O site abre em `http://localhost:4321`.
 title: Orquestração de pagamentos
 translationKey: payment-orchestration
 order: 2
-context: [MillionsPay, 2026–hoje]
+context: [Gateway de pagamentos, 2026–hoje]
 metrics:
   - value: Centenas de milhares de reais
     label: processados nos primeiros meses

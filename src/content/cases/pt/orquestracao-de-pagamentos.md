@@ -2,7 +2,7 @@
 title: Orquestração de pagamentos
 translationKey: payment-orchestration
 order: 2
-context: [MillionsPay, 2026–hoje]
+context: [Gateway de pagamentos, 2026–hoje]
 metrics:
   - value: Centenas de milhares de reais
     label: processados nos primeiros meses
@@ -11,7 +11,7 @@ tags: [PHP, Laravel, Bun, Docker, RabbitMQ, Redis]
 
 Um gateway de pagamentos fica no meio do caminho entre quem vende e as instituições que processam o dinheiro. Se algo dá errado ali, alguém deixa de receber.
 
-Na MillionsPay, trabalho no sistema que decide por onde cada pagamento vai passar. A plataforma se conecta a várias adquirentes, as instituições que processam os pagamentos, e escolhe a rota de cada transação de acordo com o vendedor e a forma de pagamento, seguindo uma ordem de prioridade definida para cada um.
+No gateway em que trabalho hoje, cuido do sistema que decide por onde cada pagamento vai passar. A plataforma se conecta a várias adquirentes, as instituições que processam os pagamentos, e escolhe a rota de cada transação de acordo com o vendedor e a forma de pagamento, seguindo uma ordem de prioridade definida para cada um.
 
 Também desenvolvi a divisão automática dos valores entre as partes, o chamado split: o cálculo das taxas de cada venda, as antecipações, as reservas financeiras, os saques e o débito automático em D+2, dois dias depois da venda.
 
