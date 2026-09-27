@@ -2,7 +2,7 @@
 title: Sistema de gestão de obras
 translationKey: construction-management
 order: 1
-context: [Construtora de alto padrão, 2023–2025]
+context: [Construtora de alto padrão]
 metrics:
   - value: 1 a 2 meses
     label: antes do prazo de contrato

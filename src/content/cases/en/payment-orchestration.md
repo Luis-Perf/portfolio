@@ -2,7 +2,7 @@
 title: Payment orchestration
 translationKey: payment-orchestration
 order: 2
-context: [Payment gateway, 2026–present]
+context: [Payment gateway]
 metrics:
   - value: Hundreds of thousands of reais
     label: processed in the first months
