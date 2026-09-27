@@ -1,0 +1,7 @@
+* text=auto eol=lf
+
+# vCard requires CRLF line endings (RFC 6350)
+*.vcf text eol=crlf
+
+*.png binary
+*.jpg binary
