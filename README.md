@@ -53,7 +53,7 @@ O site apresenta serviços, projetos e trajetória para pequenas e médias empre
 
 ## Rodando localmente
 
-Requer Node.js 22 ou superior.
+Requer Node.js 22 ou superior. A versão usada no CI e no deploy fica em `.node-version`.
 
 ```sh
 npm install
@@ -177,7 +177,7 @@ Cloudflare Workers com static assets, conectado ao GitHub: cada push na `main` g
 | --- | --- |
 | Comando de build | `npm run build` |
 | Comando de deploy | `npx wrangler deploy` |
-| Variável de ambiente | `NODE_VERSION=24` |
+| Versão do Node | lida do `.node-version` |
 
 Para testar localmente no mesmo runtime da produção, com os headers aplicados:
 
