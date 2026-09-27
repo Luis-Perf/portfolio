@@ -2,7 +2,7 @@
 title: Sistema de gestão de obras
 translationKey: construction-management
 order: 1
-context: [Engenharia Braga, 2023–2025]
+context: [Construtora de alto padrão, 2023–2025]
 metrics:
   - value: 1 a 2 meses
     label: antes do prazo de contrato
@@ -11,7 +11,7 @@ metrics:
 tags: [Node.js, React, PostgreSQL, MongoDB]
 ---
 
-Na Engenharia Braga, engenharia, suprimentos, financeiro e fornecedores trabalhavam cada um com as suas próprias informações. Quando faltava material na obra ou um gasto saía do orçamento, o problema só aparecia depois.
+Na construtora, cada área trabalhava com as suas próprias informações: engenharia, suprimentos, financeiro e fornecedores. Quando faltava material na obra ou um gasto saía do orçamento, o problema só aparecia depois.
 
 Antes de escrever o sistema, passei um tempo no canteiro acompanhando a rotina, para entender em que ponto a informação se perdia entre uma área e outra.
 

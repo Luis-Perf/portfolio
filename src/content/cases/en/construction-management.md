@@ -2,7 +2,7 @@
 title: Construction management system
 translationKey: construction-management
 order: 1
-context: [Engenharia Braga, 2023–2025]
+context: [High-end construction company, 2023–2025]
 metrics:
   - value: 1 to 2 months
     label: ahead of the contract deadline
@@ -11,7 +11,7 @@ metrics:
 tags: [Node.js, React, PostgreSQL, MongoDB]
 ---
 
-At Engenharia Braga, engineering, procurement, finance and suppliers each worked with their own information. When materials ran short on site or spending went over budget, the problem only showed up later.
+At the construction company, each area worked with its own information: engineering, procurement, finance and suppliers. When materials ran short on site or spending went over budget, the problem only showed up later.
 
 Before writing the system, I spent time on the construction site following the daily routine, to understand where information got lost between one area and the next.
 

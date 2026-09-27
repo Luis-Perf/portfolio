@@ -2,7 +2,7 @@
 title: Payment orchestration
 translationKey: payment-orchestration
 order: 2
-context: [MillionsPay, 2026–present]
+context: [Payment gateway, 2026–present]
 metrics:
   - value: Hundreds of thousands of reais
     label: processed in the first months
@@ -11,7 +11,7 @@ tags: [PHP, Laravel, Bun, Docker, RabbitMQ, Redis]
 
 A payment gateway sits in the middle, between whoever is selling and the institutions that process the money. If something goes wrong there, someone doesn't get paid.
 
-At MillionsPay, I work on the system that decides which route each payment takes. The platform connects to several acquirers, the institutions that process payments, and picks the route for each transaction based on the seller and the payment method, following a priority order defined for each one.
+At the gateway where I work today, I look after the system that decides which route each payment takes. The platform connects to several acquirers, the institutions that process payments, and picks the route for each transaction based on the seller and the payment method, following a priority order defined for each one.
 
 I also built the automatic splitting of amounts between the parties, known as the split: the fee calculation for each sale, advances, financial reserves, payouts and the automatic debit on D+2, two days after the sale.
 
