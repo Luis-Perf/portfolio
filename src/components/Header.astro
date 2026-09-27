@@ -1,4 +1,5 @@
 ---
+import { site } from '../config/site';
 import { homePath, otherLang, type Alternates } from '../i18n/routes';
 import { languages, useTranslations, type Lang } from '../i18n/ui';
 import Icon from './Icon.astro';
@@ -23,7 +24,7 @@ const links = [services, projects, career, about, contact];
     {/* On the home page "#top" scrolls up instead of reloading. */}
     <a class="brand" href={isHome ? '#top' : home} aria-current={isHome ? 'page' : undefined}>
       <span class="brand-node" aria-hidden="true"></span>
-      Luis Perfeito
+      {site.name}
     </a>
 
     <nav aria-label={t.a11y.mainNav}>

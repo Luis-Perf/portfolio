@@ -3,7 +3,7 @@ export type Lang = keyof typeof languages;
 
 const pt = {
   meta: {
-    title: 'Luis Perfeito — Desenvolvedor de Software',
+    title: 'Luis Felipe Perfeito — Desenvolvedor de Software',
     description:
       'Integrações, automações e sites sob medida para pequenas e médias empresas que querem crescer sem depender de planilha, retrabalho e processo manual.',
     ogLocale: 'pt_BR',
@@ -24,10 +24,10 @@ const pt = {
     contact: { id: 'contato', title: 'Contato' },
   },
   hero: {
-    eyebrow: 'Luis Perfeito · Desenvolvedor de Software',
+    eyebrow: 'Luis Felipe Perfeito · Desenvolvedor de Software',
     titleStart: 'Faço os sistemas da sua empresa',
     titleHighlight: 'trabalharem juntos.',
-    lead: 'Sou Luis Perfeito, desenvolvedor de software. Crio integrações, automações e sites sob medida para pequenas e médias empresas que querem crescer sem depender de planilha, retrabalho e processo manual.',
+    lead: 'Sou Luis Felipe Perfeito, desenvolvedor de software. Crio integrações, automações e sites sob medida para pequenas e médias empresas que querem crescer sem depender de planilha, retrabalho e processo manual.',
     primaryCta: 'Conversar no WhatsApp',
     secondaryCta: 'Ver projetos',
     diagram: {
@@ -92,8 +92,8 @@ const pt = {
   },
   about: {
     text: 'Comecei em 2021 testando software numa empresa de seguros, e aprendi cedo que sistema bom é aquele que não falha quando alguém depende dele. Depois fui para uma construtora, onde passei tanto tempo na obra quanto no código. Hoje trabalho com pagamentos, onde cada transação importa. Em comum entre tudo isso: áreas diferentes precisando que a informação chegue certa, na hora certa. É isso que eu construo.',
-    photoAlt: 'Luis Perfeito, de camisa azul, com as mãos apoiadas sob o queixo, olhando para o lado.',
-    photoCaption: 'Fig. 02 — Luis Perfeito',
+    photoAlt: 'Luis Felipe Perfeito, de camisa azul, com as mãos apoiadas sob o queixo, olhando para o lado.',
+    photoCaption: 'Fig. 02 — Luis Felipe Perfeito',
     educationTitle: 'Formação',
     education: [
       { course: 'Bacharelado em Ciência da Computação', school: 'Universidade São Judas Tadeu', period: '2019–2022' },
@@ -138,7 +138,7 @@ export type Dictionary = typeof pt;
 
 const en: Dictionary = {
   meta: {
-    title: 'Luis Perfeito — Software Developer',
+    title: 'Luis Felipe Perfeito — Software Developer',
     description:
       'Custom integrations, automations and websites for small and mid-sized businesses that want to grow without relying on spreadsheets, rework and manual processes.',
     ogLocale: 'en_US',
@@ -159,10 +159,10 @@ const en: Dictionary = {
     contact: { id: 'contact', title: 'Contact' },
   },
   hero: {
-    eyebrow: 'Luis Perfeito · Software Developer',
+    eyebrow: 'Luis Felipe Perfeito · Software Developer',
     titleStart: 'I make your company’s systems',
     titleHighlight: 'work together.',
-    lead: 'I’m Luis Perfeito, a software developer. I build custom integrations, automations and websites for small and mid-sized businesses that want to grow without relying on spreadsheets, rework and manual processes.',
+    lead: 'I’m Luis Felipe Perfeito, a software developer. I build custom integrations, automations and websites for small and mid-sized businesses that want to grow without relying on spreadsheets, rework and manual processes.',
     primaryCta: 'Chat on WhatsApp',
     secondaryCta: 'See projects',
     diagram: {
@@ -227,8 +227,8 @@ const en: Dictionary = {
   },
   about: {
     text: 'I started in 2021 testing software at an insurance company, and learned early that a good system is one that doesn’t fail when someone depends on it. Then I moved to a construction company, where I spent as much time on site as in the code. Today I work with payments, where every transaction matters. What all of this has in common: different areas needing information to arrive right, and on time. That’s what I build.',
-    photoAlt: 'Luis Perfeito, wearing a blue shirt, resting his chin on his hands and looking to the side.',
-    photoCaption: 'Fig. 02 — Luis Perfeito',
+    photoAlt: 'Luis Felipe Perfeito in a blue shirt, chin resting on clasped hands, looking to the side.',
+    photoCaption: 'Fig. 02 — Luis Felipe Perfeito',
     educationTitle: 'Education',
     education: [
       { course: 'B.Sc. in Computer Science', school: 'Universidade São Judas Tadeu', period: '2019–2022' },
