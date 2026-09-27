@@ -123,7 +123,6 @@ const pt = {
   },
   footer: {
     role: 'Desenvolvedor de Software',
-    elsewhere: 'Redes',
   },
   notFound: {
     title: 'Página não encontrada',
@@ -256,7 +255,6 @@ const en: Dictionary = {
   },
   footer: {
     role: 'Software Developer',
-    elsewhere: 'Elsewhere',
   },
   notFound: {
     title: 'Page not found',
