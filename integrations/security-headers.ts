@@ -10,7 +10,7 @@ const DATA_SCRIPT_TYPE = /\btype=["']?application\/(ld\+)?json/i;
 const INLINE_STYLE = /<style\b[^>]*>([\s\S]*?)<\/style>/gi;
 const STYLE_ATTRIBUTE = /<[^>]+\sstyle=/i;
 
-// Cloudflare Web Analytics beacon, injected by Pages when analytics is on.
+// Cloudflare Web Analytics beacon, injected by Cloudflare when analytics is on.
 const ANALYTICS_SCRIPT = 'https://static.cloudflareinsights.com';
 const ANALYTICS_CONNECT = 'https://cloudflareinsights.com';
 
@@ -59,7 +59,7 @@ function buildHeaders(csp: string): string {
 }
 
 /**
- * Writes the Cloudflare Pages `_headers` file after the build. Inline scripts are
+ * Writes the Cloudflare `_headers` file after the build. Inline scripts are
  * hashed from the final HTML, so the CSP never needs 'unsafe-inline' and stays in
  * sync when a script changes.
  */

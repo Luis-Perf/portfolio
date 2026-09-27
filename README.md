@@ -49,7 +49,7 @@ O site apresenta serviços, projetos e trajetória para pequenas e médias empre
 | Fontes | Bricolage Grotesque, Instrument Sans e IBM Plex Mono, servidas pelo próprio site via Fontsource |
 | Imagens | `astro:assets` (AVIF, WebP e JPG responsivos) |
 | Qualidade | ESLint (com regras de acessibilidade), `astro check`, Lighthouse CI |
-| Hospedagem | Cloudflare Pages |
+| Hospedagem | Cloudflare Workers (static assets) |
 
 ## Rodando localmente
 
@@ -126,7 +126,7 @@ O build falha se um projeto existir em só um idioma.
 
 **HTML estático e o mínimo de JavaScript.** O site é conteúdo, não aplicação. O único script aplica o tema escolhido e acrescenta a saudação ao link do WhatsApp. Sem ele, tudo continua funcionando: o tema segue o sistema e o link usa uma mensagem neutra.
 
-**CSP calculada a partir do build.** A integração `security-headers` lê o HTML final, calcula o SHA-256 de cada script inline e escreve o `_headers` do Cloudflare Pages. A política nunca usa `'unsafe-inline'` e não fica desatualizada quando um script muda. A CSP do Astro não foi usada porque é entregue via `<meta>`, e `frame-ancestors` só funciona como header HTTP.
+**CSP calculada a partir do build.** A integração `security-headers` lê o HTML final, calcula o SHA-256 de cada script inline e escreve o `_headers` que a Cloudflare aplica. A política nunca usa `'unsafe-inline'` e não fica desatualizada quando um script muda. A CSP do Astro não foi usada porque é entregue via `<meta>`, e `frame-ancestors` só funciona como header HTTP.
 
 **CSS sempre externo.** Com `inlineStylesheets: 'never'`, a política fica em `style-src 'self'`. O build falha se algum atributo `style=""` aparecer no HTML.
 
@@ -171,13 +171,20 @@ O site não tem backend nem formulário, e o repositório não guarda segredos.
 
 ## Deploy
 
-Cloudflare Pages, com deploy automático a cada push na `main`.
+Cloudflare Workers com static assets, conectado ao GitHub: cada push na `main` gera um deploy, e cada pull request ganha uma URL de preview. O `wrangler.jsonc` publica a pasta `dist` e usa o `404.html` para rotas inexistentes. Não há código rodando no servidor, só arquivos estáticos.
 
 | Configuração | Valor |
 | --- | --- |
 | Comando de build | `npm run build` |
-| Diretório de saída | `dist` |
-| Node.js | 24 |
+| Comando de deploy | `npx wrangler deploy` |
+| Variável de ambiente | `NODE_VERSION=24` |
+
+Para testar localmente no mesmo runtime da produção, com os headers aplicados:
+
+```sh
+npm run build
+npx wrangler dev
+```
 
 ## Direitos
 
