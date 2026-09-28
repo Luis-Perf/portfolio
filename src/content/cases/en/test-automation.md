@@ -4,15 +4,17 @@ translationKey: test-automation
 order: 3
 context: [Insurance consultancy]
 metrics:
-  - value: 2 to 3 hours
-    label: freed up every day
+  - value: Load and stress
+    label: validated on top of functional tests
 tags: [Java, Python, Robot Framework, Selenium]
 ---
 
-Every day, some two or three hours went into running the same tests by hand. It was my first job in the field, as a QA intern working on the insurance claims systems.
+It was my first job in the field, as a QA intern on the claims systems of an insurance consultancy. It's the system a policyholder turns to when something has already gone wrong, so a failure there weighs more.
 
-I automated the routine tests with Robot Framework and Selenium: scripts that move through the system the way a user would and check every result on their own. That way, regression tests, the ones that catch something that used to work and stopped working, ran without anyone repeating everything by hand.
+Part of the job was investigating: describing each bug clearly, mapping where it showed up and analyzing its cause with the developers, so the fix would target the right problem.
 
-I also started documenting every new scenario before it went to production: what needed to be validated and what the expected result was. Those records became the basis for sign-off and for talking with developers and the business side whenever something failed in production.
+I also validated the system under pressure, with load and stress tests, which show how it behaves when many people use it at once and how far it goes before it breaks.
+
+For the scenarios that repeated the most, I wrote scripts to automate the tests with Robot Framework and Selenium, which move through the system the way a user would and check every result on their own. Every new scenario also started being documented before it went to production: what needed to be validated and what the expected result was.
 
 The team got time back, and testing gained a method.
